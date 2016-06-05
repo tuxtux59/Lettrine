@@ -4,6 +4,8 @@
         <attr name="lettrine_textSize" format="dimension" />
         <attr name="lettrine_text" format="string" />
         <attr name="lettrine_textColor" format="reference" />
+        <attr name="lettrine_lettrine_textColor" format="reference" />
+        <attr name="lettrine_body_textColor" format="reference" />
         <attr name="lettrine_font" format="string" />
         <attr name="lettrine_lettrineSize" format="integer" />
     </declare-styleable>

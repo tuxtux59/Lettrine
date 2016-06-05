@@ -58,6 +58,8 @@ class LettrineTextView : FrameLayout {
     private var fontPath: String? = null
     private var bodyText: String? = null
     @ColorInt private var textColor: Int = DEFAULT_TEXT_COLOR
+    @ColorInt private var lettrinetextColor: Int = DEFAULT_TEXT_COLOR
+    @ColorInt private var bodytextColor: Int = DEFAULT_TEXT_COLOR
 
 
     // ---------------------------------
@@ -79,9 +81,21 @@ class LettrineTextView : FrameLayout {
     }
 
     fun setTextColor(@ColorInt newTextColor: Int) {
-        textColor = newTextColor
+        lettrinetextColor = newTextColor
+        bodytextColor = newTextColor
         updateTextColor()
     }
+
+    fun setLettrineTextColor(@ColorInt newTextColor: Int) {
+        lettrinetextColor = newTextColor
+        updateLettrineColor()
+    }
+
+    fun setBodyTextColor(@ColorInt newTextColor: Int) {
+        bodytextColor = newTextColor
+        updateBodyColor()
+    }
+
 
     fun setBodyTextSize(newBodyTextSizePixels: Int) {
         bodyTextSize = newBodyTextSizePixels
@@ -119,15 +133,24 @@ class LettrineTextView : FrameLayout {
             bodyTextSize = typedArray.getDimensionPixelSize(R.styleable.LettrineTextView_lettrine_textSize, DEFAULT_TEXT_SIZE_SP)
             fontPath = typedArray.getString(R.styleable.LettrineTextView_lettrine_font)
             textColor = typedArray.getColor(R.styleable.LettrineTextView_lettrine_textColor, DEFAULT_TEXT_COLOR)
+            bodytextColor = typedArray.getColor(R.styleable.LettrineTextView_lettrine_body_textColor, textColor)
+            lettrinetextColor = typedArray.getColor(R.styleable.LettrineTextView_lettrine_lettrine_textColor, textColor)
             bodyText = typedArray.getString(R.styleable.LettrineTextView_lettrine_text) ?: ""
         }
     }
 
     private fun updateTextColor() {
-        bodyTextView.textColor = textColor
-        lettrineTextView.textColor = textColor
+        updateBodyColor()
+        updateLettrineColor()
     }
 
+    private fun updateBodyColor(){
+        bodyTextView.textColor = bodytextColor
+    }
+
+    private fun updateLettrineColor(){
+        lettrineTextView.textColor = lettrinetextColor
+    }
     private fun getTextViewWidth(textView: TextView): Int {
         val bounds = Rect()
         textView.paint.getTextBounds(textView.text.toString(), 0, textView.text.length, bounds)
